@@ -69,6 +69,27 @@
     background:rgba(255,255,255,.02);color:var(--ink);border-radius:7px;padding:6px 12px;font-size:12px;cursor:pointer;transition:.2s}
   .idxbtn:hover{background:rgba(78,240,168,.08);border-color:var(--mint-glow);box-shadow:0 0 18px -6px var(--mint-glow)}
 
+  /* right-side index rail */
+  .idxrail{position:fixed;right:clamp(14px,1.9vw,26px);top:50%;transform:translateY(-50%);z-index:140;
+    display:flex;flex-direction:column;gap:2px;align-items:flex-end}
+  .idxrail a{display:flex;align-items:center;justify-content:flex-end;gap:9px;height:20px;text-decoration:none;
+    color:var(--ink-faint);cursor:pointer}
+  .idxrail .irl-label{font-family:var(--mono);font-size:11px;letter-spacing:.01em;white-space:nowrap;
+    opacity:0;transform:translateX(5px);pointer-events:none;
+    background:rgba(7,8,11,.72);backdrop-filter:blur(6px);padding:2px 8px;border-radius:6px;border:1px solid transparent;
+    transition:opacity .3s var(--ease),transform .3s var(--ease),color .25s,border-color .25s}
+  .idxrail .irl-num{font-family:var(--mono);font-size:10px;color:inherit;opacity:.7;font-variant-numeric:tabular-nums;transition:opacity .25s}
+  .idxrail .irl-tick{width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.45;
+    transition:width .3s var(--ease),opacity .25s,background .25s,box-shadow .25s}
+  .idxrail a:hover{color:var(--ink)}
+  .idxrail:hover .irl-label,.idxrail a:hover .irl-label{opacity:1;transform:none}
+  .idxrail a:hover .irl-tick{opacity:1;width:24px}
+  .idxrail a.active{color:var(--mint)}
+  .idxrail a.active .irl-num{opacity:1}
+  .idxrail a.active .irl-tick{opacity:1;width:32px;background:var(--mint);box-shadow:0 0 10px var(--mint-glow)}
+  .idxrail a.active .irl-label{color:var(--mint);border-color:rgba(78,240,168,.22)}
+  @media(max-width:1180px){.idxrail{display:none}}
+
   /* index overlay */
   .overlay{position:fixed;inset:0;z-index:200;background:rgba(7,8,11,.9);backdrop-filter:blur(20px);
     opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s;display:flex;flex-direction:column}
@@ -333,6 +354,8 @@
     <button class="idxbtn mono" id="idxbtn">≡ index</button>
   </div>
 </header>
+
+<nav class="idxrail" id="idxrail" aria-label="Section index"></nav>
 
 <!-- INDEX OVERLAY -->
 <div class="overlay" id="overlay">
@@ -628,6 +651,16 @@
   });
   document.querySelector('.ov-top .t').textContent='// index — '+total+' frames';
 
+  // right-side index rail
+  const idxrail=document.getElementById('idxrail');
+  const railMap={};
+  sections.forEach(s=>{
+    const a=document.createElement('a');a.href='#'+s.id;a.dataset.id=s.id;
+    a.setAttribute('aria-label',s.num+' '+s.title);
+    a.innerHTML=`<span class="irl-label">[${s.num}] ${s.title.toLowerCase()}</span><span class="irl-num">${s.num}</span><span class="irl-tick"></span>`;
+    idxrail.appendChild(a);railMap[s.id]=a;
+  });
+
   const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
     const sibs=[...e.target.parentElement.children];
     e.target.style.transitionDelay=(Math.min(sibs.indexOf(e.target),3)*55)+'ms';
@@ -669,7 +702,8 @@
 
   const curNum=document.getElementById('curNum'),curName=document.getElementById('curName');
   const spy=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
-    const s=sections.find(x=>x.id===e.target.id);if(s){curNum.textContent=s.num;curName.textContent=s.title.toLowerCase();}}})},{rootMargin:'-45% 0px -50% 0px'});
+    const s=sections.find(x=>x.id===e.target.id);if(s){curNum.textContent=s.num;curName.textContent=s.title.toLowerCase();
+      Object.values(railMap).forEach(a=>a.classList.remove('active'));railMap[s.id]?.classList.add('active');}}})},{rootMargin:'-45% 0px -50% 0px'});
   sections.forEach(s=>{const el=document.getElementById(s.id);if(el)spy.observe(el);});
 
   const overlay=document.getElementById('overlay');
