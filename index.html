@@ -70,13 +70,13 @@
   .idxbtn:hover{background:rgba(78,240,168,.08);border-color:var(--mint-glow);box-shadow:0 0 18px -6px var(--mint-glow)}
 
   /* right-side index rail — chapter titles, click to jump */
-  .idxrail{position:fixed;right:clamp(12px,1.6vw,24px);top:50%;transform:translateY(-50%);z-index:140;
-    display:flex;flex-direction:column;gap:1px;align-items:flex-end}
-  .idxrail a{font-family:var(--mono);font-size:11px;letter-spacing:.01em;line-height:1;white-space:nowrap;text-decoration:none;
-    color:var(--ink-faint);padding:5px 10px;border-radius:7px;border:1px solid transparent;
-    background:rgba(7,8,11,.35);backdrop-filter:blur(5px);
-    transition:color .2s,background .2s,border-color .2s,padding .2s}
-  .idxrail a:hover{color:var(--ink);background:rgba(7,8,11,.7);border-color:var(--line-2)}
+  .idxrail{position:fixed;right:clamp(10px,1.3vw,18px);top:50%;transform:translateY(-50%);z-index:140;
+    display:flex;flex-direction:column;gap:0;align-items:flex-end}
+  .idxrail a{font-family:var(--mono);font-size:9px;letter-spacing:.01em;line-height:1;white-space:nowrap;text-decoration:none;
+    color:var(--ink-faint);padding:3px 7px;border-radius:6px;border:1px solid transparent;
+    background:rgba(7,8,11,.3);backdrop-filter:blur(5px);
+    transition:color .18s,background .18s,border-color .18s}
+  .idxrail a:hover{color:var(--ink);background:rgba(7,8,11,.72);border-color:var(--line-2)}
   .idxrail a.active{color:var(--mint);background:rgba(78,240,168,.1);border-color:rgba(78,240,168,.24)}
   @media(max-width:1180px){.idxrail{display:none}}
 
@@ -103,6 +103,7 @@
   .hero-top{font-family:var(--mono);font-size:12px;color:var(--ink-faint);border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:clamp(20px,3vw,36px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(22px,3.6vw,44px);align-items:center}
   @media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+  @media(min-width:881px){.term{transform:translateX(clamp(-34px,-2.2vw,-16px))}}
   .hero h1{font-size:clamp(30px,5.2vw,58px);font-weight:600;letter-spacing:-.03em}
   .hero h1 .acc{background:var(--grad-acc);-webkit-background-clip:text;background-clip:text;color:transparent}
   .hero h1 .amp{color:var(--ink-faint);font-weight:500}
@@ -276,7 +277,7 @@
     background:linear-gradient(120deg,var(--mint),var(--blue) 55%,var(--lilac));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
 
   /* design-process carousel */
-  .carousel{position:relative;max-width:min(1290px,93vw);margin:0 auto;padding:clamp(15px,1.9vw,24px) clamp(16px,6vw,80px) clamp(10px,1.6vw,18px);z-index:2}
+  .carousel{position:relative;max-width:min(1290px,93vw);margin:0 auto;padding:clamp(15px,1.9vw,24px) clamp(16px,2.4vw,30px) clamp(10px,1.6vw,18px);z-index:2}
   .caro-hint{display:flex;align-items:center;justify-content:center;gap:12px;font-size:12px;color:var(--ink-dim);margin-bottom:15px;text-align:center}
   .caro-hint b{color:var(--mint);font-weight:600}
   .caro-hint .hl{flex:0 0 auto;width:clamp(24px,5vw,64px);height:1px;background:linear-gradient(90deg,transparent,var(--mint),transparent);opacity:.7}
@@ -285,23 +286,21 @@
   .caro-track{display:flex;gap:clamp(12px,1.5vw,20px);transition:transform .55s var(--ease);will-change:transform}
   .caro-track>figure.slide{flex:0 0 91%;width:91%;margin:0}
   @media(max-width:600px){.caro-track>figure.slide{flex:0 0 88%;width:88%}}
-  .caro-arrow{position:absolute;top:46%;transform:translateY(-50%);z-index:6;width:52px;height:52px;border-radius:50%;
-    border:1.5px solid rgba(255,255,255,.2);background:rgba(10,12,16,.82);backdrop-filter:blur(10px);color:#fff;font-size:26px;line-height:1;cursor:pointer;
-    display:grid;place-items:center;padding:0;box-shadow:0 10px 30px -10px rgba(0,0,0,.8);
+  .caro-arrow{z-index:6;width:36px;height:36px;border-radius:50%;flex:0 0 auto;
+    border:1.5px solid rgba(255,255,255,.18);background:rgba(10,12,16,.82);backdrop-filter:blur(10px);color:#fff;font-size:19px;line-height:1;cursor:pointer;
+    display:grid;place-items:center;padding:0;box-shadow:0 6px 18px -8px rgba(0,0,0,.8);
     transition:background .2s,border-color .2s,box-shadow .2s,opacity .2s,transform .2s}
-  .caro-arrow:hover{background:rgba(16,20,26,.95);border-color:var(--mint);box-shadow:0 10px 30px -10px #000,0 0 28px -4px var(--mint-glow);transform:translateY(-50%) scale(1.07)}
-  .caro-arrow.prev{left:-64px}.caro-arrow.next{right:-64px}
-  @media(max-width:680px){.caro-arrow{display:none}}
+  .caro-arrow:hover{background:rgba(16,20,26,.95);border-color:var(--mint);box-shadow:0 8px 24px -8px #000,0 0 22px -4px var(--mint-glow);transform:scale(1.08)}
   .caro-arrow.disabled{opacity:.22;pointer-events:none}
   .carousel:not(.touched) .caro-arrow.next{animation:caroNudge 1.7s ease-in-out infinite}
-  @keyframes caroNudge{0%,100%{box-shadow:0 10px 30px -10px rgba(0,0,0,.8),0 0 0 0 rgba(127,231,173,0);transform:translateY(-50%) translateX(0)}
-    50%{box-shadow:0 10px 30px -10px #000,0 0 30px -2px var(--mint-glow);transform:translateY(-50%) translateX(6px)}}
-  .caro-ctl{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:16px}
+  @keyframes caroNudge{0%,100%{box-shadow:0 6px 18px -8px rgba(0,0,0,.8),0 0 0 0 rgba(127,231,173,0);transform:translateX(0)}
+    50%{box-shadow:0 8px 24px -8px #000,0 0 24px -2px var(--mint-glow);transform:translateX(4px)}}
+  .caro-ctl{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:18px}
   .caro-dots{display:flex;gap:9px;align-items:center}
   .caro-dot{width:9px;height:9px;border-radius:50%;border:none;background:#363c46;cursor:pointer;padding:0;transition:width .25s,background .25s}
   .caro-dot:hover{background:#4a525e}
   .caro-dot.on{width:28px;border-radius:5px;background:linear-gradient(90deg,var(--mint),var(--blue),var(--lilac))}
-  .caro-count{font-size:13px;color:var(--ink-dim)}
+  .caro-count{font-size:13px;color:var(--ink-dim);margin-left:2px}
 
   /* lightbox */
   .lb.single .nav{display:none}
@@ -540,12 +539,12 @@
     const prev=document.createElement('button'); prev.className='caro-arrow prev'; prev.type='button'; prev.setAttribute('aria-label','Previous'); prev.textContent='‹';
     const next=document.createElement('button'); next.className='caro-arrow next'; next.type='button'; next.setAttribute('aria-label','Next'); next.textContent='›';
     const stage=document.createElement('div'); stage.className='caro-stage';
-    stage.appendChild(vp); stage.appendChild(prev); stage.appendChild(next); c.appendChild(stage);
+    stage.appendChild(vp); c.appendChild(stage);
     const ctl=document.createElement('div'); ctl.className='caro-ctl';
     const dots=document.createElement('div'); dots.className='caro-dots';
     slideNums.forEach((_,i)=>{const d=document.createElement('button'); d.type='button'; d.className='caro-dot'+(i===0?' on':''); d.dataset.i=i; d.setAttribute('aria-label','Go to frame '+(i+1)); dots.appendChild(d);});
     const cnt=document.createElement('div'); cnt.className='caro-count mono';
-    ctl.appendChild(dots); ctl.appendChild(cnt); c.appendChild(ctl);
+    ctl.appendChild(prev); ctl.appendChild(dots); ctl.appendChild(next); ctl.appendChild(cnt); c.appendChild(ctl);
     let idx=0;
     function go(i){idx=Math.max(0,Math.min(N-1,i));
       const t=track.children[idx];
@@ -645,7 +644,7 @@
   const idxrail=document.getElementById('idxrail');
   const railMap={};
   const NAV_SHORT={overview:'Overview',outcome:'Outcome',process:'Role & Process',problem:'The Problem',
-    solution1:'Role Hierarchy',designsystem:'Design System',forms:'Form-filling',review:'Review & Validation',reflection:'Reflection'};
+    solution1:'Role Hierarchy',designsystem:'Design System',forms:'Form-filling',review:'Final Review',reflection:'Reflection'};
   sections.forEach(s=>{
     const a=document.createElement('a');a.href='#'+s.id;a.dataset.id=s.id;
     a.textContent=NAV_SHORT[s.id]||s.title;a.setAttribute('aria-label',s.num+' '+s.title);
