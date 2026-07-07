@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-<link rel="preload" as="image" href="slides/slide-01.jpg?v=4" />
+<link rel="preload" as="image" href="slides/slide-01.jpg?v=5" />
 <style>
   :root{
     --bg:#07080b; --card:#0d1015; --card-2:#0a0c10; --line:rgba(255,255,255,.08);
@@ -482,7 +482,7 @@
   ];
 
   const pad=n=>String(n).padStart(2,'0');
-  const ASSET_V='4'; // bump when a slide image is replaced, to bust browser cache
+  const ASSET_V='5'; // bump when a slide image is replaced, to bust browser cache
   const src=n=>`slides/slide-${pad(n)}.jpg?v=${ASSET_V}`;
   const thumb=n=>`slides/thumbs/slide-${pad(n)}.jpg?v=${ASSET_V}`;
   const deck=document.getElementById('deck');
